@@ -1,5 +1,6 @@
 ﻿body {
     padding-bottom: 20px;
+    background-color: #272822;
 }
 
 /* Wrapping element */
@@ -62,7 +63,7 @@ textarea {
     white-space: pre-line !important;
 }
 
-.mainBody, .mainBody .token {
+.mainBody, .mainBody .token, #progress {
     color: #eee !important;
 }
 
@@ -80,22 +81,26 @@ span {
 .container {
     width: 100% !important;
     padding: 0 !important;
+    overflow: hidden;
 }
 
 .imgWrapper img {
     display: none;
 }
 
-.imgWrapper:hover {
-    position: absolute;
+@media (min-width: 1000px) {
+    .imgWrapper:hover {
+        position: absolute;
+    }
+    
+    .imgWrapper:hover img {
+        display: block;
+        width: 300px;
+        position: absolute;
+        top: -50%;
+    }
 }
 
-.imgWrapper:hover img {
-    display: block;
-    width: 300px;
-    position: absolute;
-    top: -50%;
-}
 
 pre[class*="language-"] {
     margin: 0 !important;
@@ -104,10 +109,13 @@ pre[class*="language-"] {
     font-size: 1em !important;
     padding-left: 15px !important;
     padding-right: 15px !important;
+    overflow: hidden;
+    border: 0;
 }
 
 pre > code {
     padding-bottom: 10px;
+    overflow: hidden;
 }
 
 .row, footer {
