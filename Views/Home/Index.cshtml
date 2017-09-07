@@ -149,7 +149,8 @@ score=\"" + uc.score + "\" commentCount=\"" + uc.num_comments + "\"></div>" +
     function addCollapsedComments(uc) {
         var res = '';
         if (uc.num_comments > 0) {
-            res = "<div class='rantProp'>&lt;comments><div class='rantColl'><a href='javascript:void(0);' onclick='expandComments(this, " + uc.id + ");'>(click to load)</a></div>&lt;/comments></div>";
+            res = "<div class='rantProp'><img onclick='toggleVisibility(this, \"" + uc.id + 
+            "_comments\")' class='toggleImg' src='/images/minus.gif'/>&lt;comments><span id='content_" + uc.id + "_comments'><div class='rantColl'><a href='javascript:void(0);' onclick='expandComments(this, " + uc.id + ");'>(click to load)</a></div></span>&lt;/comments></div>";
         }
         return res;
     }
