@@ -1,0 +1,11 @@
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\hostpolicy.dll
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\hostfxr.dll
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\_xmlRant.exe
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\_xmlRant.deps.json
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\_xmlRant.runtimeconfig.json
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\_xmlRant.runtimeconfig.dev.json
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\_xmlRant.dll
+C:\zDev\xmlRant\bin\Release\netcoreapp1.1\win7-x64\_xmlRant.pdb
+C:\zDev\xmlRant\obj\Release\netcoreapp1.1\win7-x64\_xmlRant.AssemblyInfo.cs
+C:\zDev\xmlRant\obj\Release\netcoreapp1.1\win7-x64\_xmlRant.dll
+C:\zDev\xmlRant\obj\Release\netcoreapp1.1\win7-x64\_xmlRant.pdb

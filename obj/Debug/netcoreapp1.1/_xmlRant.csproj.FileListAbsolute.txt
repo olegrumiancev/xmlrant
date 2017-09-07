@@ -1,0 +1,8 @@
+C:\zDev\xmlRant\bin\Debug\netcoreapp1.1\_xmlRant.deps.json
+C:\zDev\xmlRant\bin\Debug\netcoreapp1.1\_xmlRant.runtimeconfig.json
+C:\zDev\xmlRant\bin\Debug\netcoreapp1.1\_xmlRant.runtimeconfig.dev.json
+C:\zDev\xmlRant\bin\Debug\netcoreapp1.1\_xmlRant.dll
+C:\zDev\xmlRant\bin\Debug\netcoreapp1.1\_xmlRant.pdb
+C:\zDev\xmlRant\obj\Debug\netcoreapp1.1\_xmlRant.AssemblyInfo.cs
+C:\zDev\xmlRant\obj\Debug\netcoreapp1.1\_xmlRant.dll
+C:\zDev\xmlRant\obj\Debug\netcoreapp1.1\_xmlRant.pdb
