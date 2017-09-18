@@ -2,7 +2,7 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "devRantNetCore/1.0.1": {
+      "devRantNetCore/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -3576,7 +3576,7 @@
       }
     },
     ".NETCoreApp,Version=v1.1/ubuntu.16.04-x64": {
-      "devRantNetCore/1.0.1": {
+      "devRantNetCore/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -7307,7 +7307,7 @@
       }
     },
     ".NETCoreApp,Version=v1.1/win7-x64": {
-      "devRantNetCore/1.0.1": {
+      "devRantNetCore/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -11133,7 +11133,7 @@
       }
     },
     ".NETCoreApp,Version=v1.1/win7-x86": {
-      "devRantNetCore/1.0.1": {
+      "devRantNetCore/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -14960,12 +14960,12 @@
     }
   },
   "libraries": {
-    "devRantNetCore/1.0.1": {
-      "sha512": "I3938iphKu/rCb2mUQkEh6ZkFRjzBvMbB0P+NCcUEoOTPRExq2e1F1/kISskxsAjgX+9hOgNbru2BWXO72nD8g==",
+    "devRantNetCore/1.0.2": {
+      "sha512": "tvBPbFZm7gD6XcIUYYpSj3TLpjV2eiy9MgQKqUNIwNQy1eL4G1Dybe7GLZGYnZ5Pb0XlOvpY9bb+aqCPq9kWYA==",
       "type": "package",
-      "path": "devrantnetcore/1.0.1",
+      "path": "devrantnetcore/1.0.2",
       "files": [
-        "devrantnetcore.1.0.1.nupkg.sha512",
+        "devrantnetcore.1.0.2.nupkg.sha512",
         "devrantnetcore.nuspec",
         "lib/netstandard1.4/devRantNetCore.dll"
       ]
@@ -22317,7 +22317,7 @@
       "Microsoft.Extensions.Logging.Debug >= 1.1.1",
       "Microsoft.NETCore.App >= 1.1.1",
       "Microsoft.VisualStudio.Web.BrowserLink >= 1.1.0",
-      "devRantNetCore >= 1.0.1"
+      "devRantNetCore >= 1.0.2"
     ]
   },
   "packageFolders": {
@@ -22326,16 +22326,16 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\zDev\\xmlRant\\_xmlRant.csproj",
+      "projectUniqueName": "c:\\zDev\\xmlRant\\_xmlRant.csproj",
       "projectName": "_xmlRant",
-      "projectPath": "C:\\zDev\\xmlRant\\_xmlRant.csproj",
-      "outputPath": "C:\\zDev\\xmlRant\\obj\\",
+      "projectPath": "c:\\zDev\\xmlRant\\_xmlRant.csproj",
+      "outputPath": "c:\\zDev\\xmlRant\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/_xmlRant.dll": "C:\\zDev\\xmlRant\\bin\\placeholder\\netcoreapp1.1\\_xmlRant.dll"
+        "lib/netcoreapp1.1/_xmlRant.dll": "c:\\zDev\\xmlRant\\bin\\placeholder\\netcoreapp1.1\\_xmlRant.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
@@ -22352,7 +22352,7 @@
           },
           "devRantNetCore": {
             "target": "Package",
-            "version": "1.0.1"
+            "version": "1.0.2"
           },
           "Microsoft.AspNetCore": {
             "target": "Package",

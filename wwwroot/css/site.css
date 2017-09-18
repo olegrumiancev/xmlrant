@@ -161,6 +161,32 @@ pre > code {
     transform: translate(-50%, -50%);
 }
 
+#rootOpeningTag {
+    background-color: transparent;
+}
+
+#rootOpeningTag.sticky {
+    position: fixed;
+    top: 0;
+    background-color: black;
+    width: 100%;
+    left: 0;
+    padding-left: 15px;
+ }
+
+#sortOpeningTag {
+    background-color: transparent;
+}
+
+#sortOpeningTag.sticky {
+    position: fixed;
+    top: 20px;
+    background-color: black;
+    width: 100%;
+    left: 0;
+    padding-left: 30px;
+}
+
 @media (min-width: 1200px) {
     .container {
         width: 100%;
