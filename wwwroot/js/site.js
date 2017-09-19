@@ -83,7 +83,7 @@ xmlRant.getData = function(progressIndicatorSelector) {
                 var $contentsDiv = $('pre');
                 if ($contentsDiv.height() < $(window).height()) {
                     $(progressIndicatorSelector).hide();
-                    xmlRant.internal.getData(progressIndicatorSelector);
+                    xmlRant.getData(progressIndicatorSelector);
                 }
             }
         },
