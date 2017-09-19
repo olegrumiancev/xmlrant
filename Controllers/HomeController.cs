@@ -32,7 +32,9 @@ namespace _xmlRant.Controllers
             var devRantClient =  DevRantClient.Create(httpClient);
             if (type == "collab")
             {
-                var collabResults = await devRantClient.GetCollaborations(pageSize, pageIndex * pageSize, false);
+                var collabResults = 
+                    //await devRantClient.GetCollaborations(pageSize, pageIndex * pageSize, false);
+                    await devRantClient.GetCollaborations(pageIndex * pageSize, 0, false);
                 return Json(collabResults);
             } 
             else
