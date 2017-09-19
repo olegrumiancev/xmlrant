@@ -20,26 +20,42 @@ namespace _xmlRant.Controllers
             return View("Index", "rant");
         }
 
-        public async Task<IActionResult> GetData(string sort, int pageIndex, int pageSize)
+        [Route("collabs")]
+        public ViewResult Collabs()
+        {
+            return View("Index", "collab");
+        }
+
+        public async Task<IActionResult> GetData(string type, string sort, int pageIndex, int pageSize)
         {
             HttpClient httpClient = new HttpClient();
             var devRantClient =  DevRantClient.Create(httpClient);
-            Sort s = Sort.Recent;
-            sort = sort.ToLower();
-            if (sort == "recent") 
+            if (type == "collab")
             {
-                s = Sort.Recent;
+                var collabResults = await devRantClient.GetCollaborations(pageSize, pageIndex * pageSize, false);
+                return Json(collabResults);
             } 
-            else if (sort == "top")
+            else
             {
-                s = Sort.Top;
+                Sort s = Sort.Recent;
+                sort = sort.ToLower();
+                if (sort == "recent") 
+                {
+                    s = Sort.Recent;
+                } 
+                else if (sort == "top")
+                {
+                    s = Sort.Top;
+                }
+                else if (sort == "algo")
+                {
+                    s = Sort.Algo;
+                }
+                
+                //devRantClient.GetCollaborations()
+                var rantResults = await devRantClient.GetRants(s, pageSize, pageIndex * pageSize);
+                return Json(rantResults);
             }
-            else if (sort == "algo")
-            {
-                s = Sort.Algo;
-            }
-            var rantResults = await devRantClient.GetRants(s, pageSize, pageIndex * pageSize);
-            return Json(rantResults);
         }
 
         public async Task<IActionResult> GetRant(int rantId)

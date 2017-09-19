@@ -1,5 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "<xmlRant/> - " + ViewBag.Sort;
+    ViewData["Title"] = "<xmlRant/> - " + Model + "s";
+    if (Model == "rant") 
+    {
+        ViewData["Title"] += " - " + ViewBag.Sort;
+    }
+    
 }
 @model String
 
@@ -7,7 +12,18 @@
     <code class="language-markup">
     @{
         @Html.Raw("&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?><br/>")
-        @Html.Raw("<div id='rootOpeningTag'>&lt;devRant currentSort=\"" + ViewBag.Sort + "\"></div>")
+        switch (Model)
+        {
+            default:
+            case "rant":
+                @Html.Raw("<div id='rootOpeningTag'>&lt;devRant type=\"" + Model + "s\" sorting=\"" + ViewBag.Sort + "\"></div>")
+                break;
+            case "collab":
+                @Html.Raw("<div id='rootOpeningTag'>&lt;devRant type=\"" + Model + "s\"></div>")
+                break;
+        }
+
+        @Html.Raw("<div id='typeOpeningTag' class='rantColl'>&lt;switch to=\"<a href='/'>rants</a>|<a href='/collabs'>collabs</a>\" /></div>")                
 
         @Html.Raw("<span class='rantColl'>&lt;!-- Hexical Labs is the original creator of devRant --></span>")
         @Html.Raw("<div class='rantColl'>&lt;original><a target='_blank' href='https://www.devrant.io/feed/recent'>https://www.devrant.io/feed/recent</a>&lt;/original></div>")
@@ -18,7 +34,14 @@
         @Html.Raw("<span class='rantColl'>&lt;!-- Oleg Rumiancev is the creator of this XML stylised version of devRant --></span>")
         @Html.Raw("<div class='rantColl'>&lt;creator><a target='_blank' href='https://www.linkedin.com/in/olegrumiancev/'>https://www.linkedin.com/in/olegrumiancev/</a>&lt;/creator></div>")
 
-        @Html.Raw("<div id='sortOpeningTag' class='rantColl'>&lt;sort by=\"<a href='/?sort=algo'>algo</a>|<a href='/?sort=top'>top</a>|<a href='/?sort=recent'>recent</a>\" /></div>")
+        switch (Model)
+        {
+            default:
+                break;
+            case "rant":
+                @Html.Raw("<div id='sortOpeningTag' class='rantColl'>&lt;sort by=\"<a href='/?sort=algo'>algo</a>|<a href='/?sort=top'>top</a>|<a href='/?sort=recent'>recent</a>\" /></div>")
+                break;
+        }
 
         @Html.Raw("<div class='rantColl'>&lt;" + Model + "s></div>")
         @Html.Raw("<div class='rantColl'>&lt;/" + Model + "s></div>")
@@ -35,227 +58,22 @@
 </div>
 
 <script type="text/javascript">
-    Prism.plugins.NormalizeWhitespace.setDefaults({
-        'remove-trailing': false,
-        'remove-indent': false,
-        'left-trim': false,
-        'right-trim': false
-    });
-
-
-    var productUserDiv = null;
-    var productOverlay = null;
-    var productOverlayImage = null;
-    var loadedRantIds = [];
-
-    var pageSize = 10;
-    var pageIndex = 0;
-    var sort = '@Html.Raw(ViewBag.Sort)';
-    //console.log(sort);
-    $(document).ready(function () {
-        prepareImageOverlay();
-        getData();
-        registerStickyElements();
-
-        $(window).scroll(function () {
-            //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            if ($(window).scrollTop() + $(window).height() > $(document).height() - 200) {
-                getData();
-            }
-        });
-    });
-
-    function registerStickyElements() {
-        setTimeout(function() {
-            var $window = $(window),
-            $stickyRootEl = $('#rootOpeningTag'),
-            elRootTop = $stickyRootEl.offset().top,
-            $stickySortEl = $('#sortOpeningTag'),
-            elSortTop = $stickySortEl.offset().top
-
-            $window.scroll(function() {
-                $stickyRootEl.toggleClass('sticky', $window.scrollTop() > elRootTop);
-                $stickySortEl.toggleClass('sticky', $window.scrollTop() > elSortTop);
-            });
-        }, 1000);
-    }
-
-    function getData() {
-        if ($("#progress").is(":visible")) {
+function executeWhenLoaded(func){
+    // for loop starts at 1 to skip the function argument.
+    for (var i = 1; i<arguments.length; i++){ 
+        if (! window[ arguments[i] ]) {
+            setTimeout(arguments.callee,50);
             return;
         }
-        $.ajax({
-            type: 'GET',
-            url: '/home/GetData',
-            data: { sort: sort, "pageIndex": pageIndex, "pageSize": pageSize},
-            dataType: 'json',
-            success: function (data) {
-                if (data != null) {
-                    if (data.success) {
-                        for (var i = 0; i < data.rants.length; i++) {
-                            var uc = data.rants[i];
-
-                            if ($.inArray(uc.id, loadedRantIds) > -1) {
-                                continue;
-                            }
-                            loadedRantIds.push(uc.id);
-
-                            var $insertBeforeThis = $("pre > code > span:last-child").prev();
-                            $insertBeforeThis.before(createHtmlFromContent(uc));
-                            Prism.highlightElement($insertBeforeThis.prev()[0]);
-
-                            // in firefox some empty spans still rendered with height, I want it to be 0
-                            $(document).find('span').each(function() {
-                                var $curr = $(this);
-                                if ($curr.text().trim() == '') {
-                                    $curr.css('display', 'none');
-                                }
-                            });
-                        }
-                        pageIndex++;
-                    }
-
-                    var $contentsDiv = $('pre');
-                    //console.log($contentsDiv.height() < $(window).height());
-                    if ($contentsDiv.height() < $(window).height()) {
-                        $("#progress").hide();
-                        getData();
-                    }
-                }
-            },
-            beforeSend : function() {
-                $("#progress").show();
-            },
-            complete : function() {
-                $("#progress").hide();
-            },
-            error: function(err) {
-                $("#progress").hide();
-                console.log(err);
-            }
-        });
     }
+    func(); // only reaches here when for loop is satisfied.
+}
 
-    function toggleVisibility(toggleElement, contentIdPart) {
-        var $img = $(toggleElement);
-        if ($img.attr('src').indexOf('minus') != -1) {
-            $img.attr('src', '/images/plus.gif');
-        } else {
-            $img.attr('src', '/images/minus.gif');
-        }
-        $('#content_' + contentIdPart).toggle();
-    }
+executeWhenLoaded(function() {
+    xmlRant.sort = '@Html.Raw(ViewBag.Sort)';
+    xmlRant.type = '@Html.Raw(Model)';
+    xmlRant.progressIndicator = "#progress";
+    xmlRant.init();
+}, 'xmlRant');
 
-    function createHtmlFromContent(uc) {
-        var createdDate = new Date(parseInt("" + uc.created_time + "000"));
-        return "<div><span style='padding-top: 5px;' class='rantTag'>&lt;!-- Posted: " + createdDate.toLocaleString() + 
-            ", <a target='_blank' href='https://devrant.io/rants/" + uc.id + "'>open in devRant</a> --></span>\
-<div class='rantTag'><img onclick='toggleVisibility(this, \"" + uc.id + 
-"\")' class='toggleImg' src='/images/minus.gif'/>&lt;rant user=\"<a target='_blank' href='https://devRant.io/users/" + 
-uc.user_username + "'>" + uc.user_username + "</a>\"</div> \
-<span class='rantProp'>score=\"" + uc.score + "\"<br/></span> \
-<span class='rantProp'>commentCount=\"" + uc.num_comments + "\"</span>>" +
-"<span id='content_" + uc.id + "'>" + 
-        addTags(uc) + 
-"<span class='rantCdata'>&lt;![CDATA[</span><div class='rantContent mainBody'>" + escapeHtml(uc.text) + 
-"</div><span class='rantCdata'>]]></span>" +
-        addImage(uc) + 
-        addCollapsedComments(uc) +
-"</span><div class='rantTag'>&lt;/rant></div></div>";
-    }
-
-    function addCollapsedComments(uc) {
-        var res = '';
-        if (uc.num_comments > 0) {
-            res = "<div class='rantProp'><img onclick='toggleVisibility(this, \"" + uc.id + 
-            "_comments\")' class='toggleImg' src='/images/minus.gif'/>&lt;comments><span id='content_" + uc.id + "_comments'><div class='rantColl'><a href='javascript:void(0);' onclick='expandComments(this, " + uc.id + ");'>(click to load)</a></div></span>&lt;/comments></div>";
-        }
-        return res;
-    }
-
-    function expandComments(el, rantId) {
-        $target = $(el).parent();
-        $target.text("Loading!..");
-        var result = '';
-        $.ajax({
-            type: 'GET',
-            url: '/home/GetRant',
-            data: { "rantId": rantId },
-            dataType: 'json',
-            success: function (data) {
-                if (data != null) {
-                    if (data.success) {
-                        for (var i = 0; i < data.comments.length; i++) {
-                            var comment = data.comments[i];
-                            console.log(comment);
-                            result += 
-"&lt;comment user=\"<a target='_blank' href='https://www.devrant.io/users/" + comment.user_username + "'>" + comment.user_username + 
-"</a>\" score=\"" + comment.score + "\">\
-<br/><span class='rantColl'>&lt;![CDATA[</span><div class='rantTag mainBody'>" + comment.body + "</div><span class='rantColl'>]]></span><br/>\
-&lt;/comment><br/>";
-                        }
-                    }
-                }
-            },
-            beforeSend : function() {
-                $("#progress").show();
-            },
-            complete : function() {
-                $("#progress").hide();
-                $target.html(result);
-                Prism.highlightElement($target[0]);
-            },
-            error: function(err) {
-                $("#progress").hide();
-                console.log(err);
-            }
-        });
-    }
-
-    function addTags(uc) {
-        var res = '(dev/null)';
-        if (uc.tags != null && uc.tags.length > 0) {
-            res = '';
-            for (var i = 0; i < uc.tags.length; i++) {
-                res += (uc.tags[i] + '; ');
-            }
-            res = res.trim();
-        }
-        res = "<div class='rantProp'>&lt;tags>" + res + "&lt;/tags></div>";
-        return res;
-    }
-
-    function addImage(uc) {
-        var res = '';
-        console.log(uc);
-        if (uc.attached_image != null) {
-            res = "<div class='rantProp'>&lt;imageUrl><span class='imgWrapper'><a href='javascript:void(0);' onclick='openImage(this)'>" + escapeHtml(uc.attached_image.url) + "<img alt='' src='" + uc.attached_image.url + "' /></a>&lt;/imageUrl></div>";
-        }
-        return res;
-    }
-
-    function openImage(el) {
-        productOverlayImage.attr('src', el.innerText);
-        productOverlay.fadeIn(100);
-        $('body').css('overflow', 'hidden');
-
-        $('.product-image-overlay-close, .product-image-overlay').click(function () {
-            productOverlay.fadeOut(100);
-            $('body').css('overflow', 'auto');
-        });
-    }
-
-    function escapeHtml(str) {
-        var div = document.createElement('div');
-        var text = document.createTextNode(str);
-        div.appendChild(text);
-        return div.innerHTML;
-    }
-
-    function prepareImageOverlay() {
-        $('body').append('<div class="product-image-overlay"><span class="product-image-overlay-close">x</span><img src="" /><div></div id="userDetails"></div>');
-        productOverlay = $('.product-image-overlay');
-        productUserDiv = $('.product-image-overlay #userDetails');
-        productOverlayImage = $('.product-image-overlay img');
-    }
 </script>

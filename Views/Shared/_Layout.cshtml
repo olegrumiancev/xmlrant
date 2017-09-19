@@ -25,17 +25,7 @@
     <link rel="icon" href="@Url.Content("~/images/favicon16.png")"/>
 </head>
 <body>
-    <div class="container body-content" style="overflow: hidden;">
-        @RenderBody()
-        <div style="display: none;">
-        <hr />
-        <footer>
-            <p>&copy; 2017 - &lt;xmlRant/&gt;</p>
-        </footer>
-        </div>
-    </div>
-
-    <environment names="Development">
+     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
@@ -53,9 +43,18 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
-        <!-- <script src="~/js/site.min.js" asp-append-version="true"></script> -->
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
+
+    <div class="container body-content" style="overflow: hidden;">
+        @RenderBody()
+        <div style="display: none;">
+        <hr />
+        <footer>
+            <p>&copy; 2017 - &lt;xmlRant/&gt;</p>
+        </footer>
+        </div>
+    </div>
 
     @RenderSection("Scripts", required: false)
 </body>
