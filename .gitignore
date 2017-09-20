@@ -1,3 +1,5 @@
 .vscode/*
 bin/*
 obj/*
+.vs/_xmlRant/v15/.suo
+_xmlRant.csproj.user
