@@ -1,6 +1,6 @@
 ﻿body {
     padding-bottom: 20px;
-    background-color: #272822;
+    background-color: black;
 }
 
 /* Wrapping element */
@@ -105,7 +105,7 @@ span {
 pre[class*="language-"] {
     margin: 0 !important;
     padding-top: 0 !important;
-    
+    background-color: black !important;
     font-size: 1em !important;
     padding-left: 15px !important;
     padding-right: 15px !important;
@@ -168,7 +168,7 @@ pre > code {
 #rootOpeningTag.sticky {
     position: fixed;
     top: 0;
-    background-color: black;
+    background-color: #1f201d;
     width: 100%;
     left: 0;
     padding-left: 15px;
@@ -181,7 +181,7 @@ pre > code {
 #sortOpeningTag.sticky {
     position: fixed;
     top: 40px;
-    background-color: black;
+    background-color: #1f201d;
     width: 100%;
     left: 0;
     padding-left: 30px;
@@ -194,7 +194,7 @@ pre > code {
 #typeOpeningTag.sticky {
     position: fixed;
     top: 20px;
-    background-color: black;
+    background-color: #1f201d;
     width: 100%;
     left: 0;
     padding-left: 30px;
