@@ -3,3 +3,5 @@ bin/*
 obj/*
 .vs/_xmlRant/v15/.suo
 _xmlRant.csproj.user
+.vs/xmlRant/v15/.suo
+.vs/slnx.sqlite
